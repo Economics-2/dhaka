@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>যোগাযোগ - ব্যানবেইস</title>
+    <style>
+        /* --- আগের স্টাইলগুলো (হুবহু রাখা হয়েছে) --- */
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        
+        .top-bar {
+            background-color: #efefef;
+            padding: 5px 10%;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+        }
+        .header {
+            background-image: linear-gradient(to bottom, #609513, #4e7a0e);
+            padding: 20px 10%;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #609513;
+            border: 3px solid #fff;
+        }
+        .site-title h1 { margin: 0; font-size: 24px; }
+        .site-title p { margin: 5px 0 0; font-size: 14px; }
+
+        .nav-bar {
+            background-color: #2c3e50;
+            padding: 0 10%;
+        }
+        .nav-bar ul { display: flex; flex-wrap: wrap; }
+        .nav-bar li { position: relative; }
+        .nav-bar a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .nav-bar a:hover { background-color: #609513; }
+
+        /* --- কন্টাক্ট পেইজের জন্য নতুন স্টাইল --- */
+        .container {
+            width: 80%;
+            margin: 30px auto;
+        }
+        
+        .page-title {
+            border-bottom: 3px solid #609513;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* বাম পাশ: ঠিকানা ও ম্যাপ */
+        .contact-info {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            min-width: 300px;
+        }
+        .info-item {
+            margin-bottom: 20px;
+        }
+        .info-item h4 {
+            color: #609513;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        .map-container {
+            width: 100%;
+            height: 250px;
+            background-color: #eee;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+
+        /* ডান পাশ: ফর্ম */
+        .contact-form {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            min-width: 300px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Fix padding issue */
+            font-family: inherit;
+        }
+        .submit-btn {
+            background-color: #609513;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #4e7a0e;
+        }
+
+        /* ফুটার স্টাইল */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 40px 10%;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { width: 95%; }
+            .contact-wrapper { flex-direction: column; }
+            .header, .top-bar { text-align: center; flex-direction: column; }
+            .nav-bar ul { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>বাংলাদেশ জাতীয় তথ্য বাতায়ন</div>
+        <div>
+            <a href="#">English</a>
+            <a href="#">লগইন</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">লোগো</div>
+        <div class="site-title">
+            <h1>বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস)</h1>
+            <p>মাধ্যমিক ও উচ্চ শিক্ষা বিভাগ, শিক্ষা মন্ত্রণালয়</p>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="index.html">প্রথম পাতা</a></li> 
+            <li><a href="#">আমাদের সম্পর্কিত</a></li>
+            <li><a href="#">অধিদপ্তরের সেবাসমূহ</a></li>
+            <li><a href="#">শিক্ষা জরিপ ২০২৫</a></li>
+            <li><a href="#">পরিসংখ্যান রিপোর্ট</a></li>
+            <li><a href="contact.html" style="background-color: #609513;">যোগাযোগ</a></li> </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="page-title">আমাদের সাথে যোগাযোগ করুন</h2>
+
+        <div class="contact-wrapper">
+            
+            <div class="contact-info">
+                <div class="info-item">
+                    <h4>প্রধান কার্যালয়ের ঠিকানা</h4>
+                    <p>১ জহির রায়হান রোড (পলাশী-নীলক্ষেত), ঢাকা-১২০৫, বাংলাদেশ।</p>
+                </div>
+                
+                <div class="info-item">
+                    <h4>অফিসিয়াল যোগাযোগ</h4>
+                    <p><strong>ফোন:</strong> +৮৮-০২-৯৬৬৫৪৫৭</p>
+                    <p><strong>ফ্যাক্স:</strong> +৮৮-০২-৮৬১০০৪০</p>
+                    <p><strong>ইমেইল:</strong> info@banbeis.gov.bd</p>
+                </div>
+
+                <div class="info-item">
+                    <h4>সহায়তা (Helpdesk)</h4>
+                    <p>যেকোনো টেকনিক্যাল সহায়তার জন্য: <br> helpdesk@banbeis.gov.bd</p>
+                </div>
+
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.2656964863645!2d90.38644231498106!3d23.737916984595507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8c30c17508f%3A0x501638985661141!2sBANBEIS!5e0!3m2!1sen!2sbd!4v1645500000000!5m2!1sen!2sbd" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div class="info-item">
+                    <h4>মতামত বা অভিযোগ ফরম</h4>
+                    <p>আপনার যেকোনো জিজ্ঞাসা নিচে পূরণ করে পাঠান।</p>
+                </div>
+                
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">আপনার নাম</label>
+                        <input type="text" id="name" name="name" placeholder="পুরো নাম লিখুন" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">ইমেইল ঠিকানা</label>
+                        <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">মোবাইল নম্বর</label>
+                        <input type="text" id="phone" name="phone" placeholder="01XXXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">বিষয় নির্বাচন করুন</label>
+                        <select id="category" name="category">
+                            <option value="general">সাধারণ জিজ্ঞাসা</option>
+                            <option value="survey">শিক্ষা জরিপ সংক্রান্ত</option>
+                            <option value="mpo">MPO / শিক্ষক তথ্য</option>
+                            <option value="technical">ওয়েবসাইট বা টেকনিক্যাল সমস্যা</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">আপনার বার্তা</label>
+                        <textarea id="message" name="message" rows="5" placeholder="বিস্তারিত লিখুন..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">বার্তা পাঠান</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">ব্যানবেইস</h3>
+                <p>শিক্ষা মন্ত্রণালয়ের অধীনস্থ একটি সরকারি প্রতিষ্ঠান।</p>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">দ্রুত লিংক</h3>
+                <ul>
+                    <li><a href="#">সিটিজেন চার্টার</a></li>
+                    <li><a href="#">কর্মকর্তাদের তালিকা</a></li>
+                    <li><a href="#">গোপনীয়তা নীতিমালা</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৫ বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস), সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+</body>
+</html>
