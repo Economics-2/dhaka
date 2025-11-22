@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কর্মকর্তা ও কর্মচারীদের তালিকা - ব্যানবেইস</title>
+    <style>
+        /* --- পূর্বের সাধারণ স্টাইলগুলো --- */
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        
+        .top-bar {
+            background-color: #efefef;
+            padding: 5px 10%;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+        }
+        .header {
+            background-image: linear-gradient(to bottom, #609513, #4e7a0e);
+            padding: 20px 10%;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #609513;
+            border: 3px solid #fff;
+        }
+        .site-title h1 { margin: 0; font-size: 24px; }
+        .site-title p { margin: 5px 0 0; font-size: 14px; }
+
+        .nav-bar {
+            background-color: #2c3e50;
+            padding: 0 10%;
+        }
+        .nav-bar ul { display: flex; flex-wrap: wrap; }
+        .nav-bar li { position: relative; }
+        .nav-bar a {
+            display: block;
+            padding: 15px 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .nav-bar a:hover { background-color: #609513; }
+        
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .page-title {
+            border-bottom: 3px solid #609513;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        /* --- ফটোকার্ড গ্রিড স্টাইল --- */
+        .officials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+        .official-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            line-height: 1.5;
+        }
+        .official-card:hover {
+            transform: translateY(-5px);
+            border-color: #609513;
+        }
+        .photo-placeholder {
+            width: 100px;
+            height: 120px;
+            background-color: #e0e0e0;
+            margin: 0 auto 10px;
+            border: 3px solid #609513;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .official-card h4 {
+            color: #2c3e50;
+            margin: 5px 0 5px;
+            font-size: 16px;
+        }
+        .official-card p {
+            font-size: 13px;
+            margin: 0;
+            color: #555;
+        }
+        .official-card .designation {
+            color: #d32f2f;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .official-card .mobile {
+            color: #609513;
+            font-weight: bold;
+            margin-top: 5px;
+            border-top: 1px dashed #eee;
+            padding-top: 5px;
+        }
+
+        /* ফুটার স্টাইল */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 40px 10%;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { width: 95%; padding: 15px; }
+            .header, .top-bar { text-align: center; flex-direction: column; }
+            .nav-bar ul { flex-direction: column; }
+            .officials-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>বাংলাদেশ জাতীয় তথ্য বাতায়ন</div>
+        <div>
+            <a href="#">English</a>
+            <a href="#">লগইন</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">লোগো</div>
+        <div class="site-title">
+            <h1>বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস)</h1>
+            <p>মাধ্যমিক ও উচ্চ শিক্ষা বিভাগ, শিক্ষা মন্ত্রণালয়</p>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="index.html">প্রথম পাতা</a></li>
+            <li><a href="about.html">আমাদের সম্পর্কিত</a></li>
+            <li><a href="services.html">সেবাসমূহ</a></li>
+            <li><a href="notice.html">নোটিশ</a></li>
+            <li><a href="officials.html" style="background-color: #609513;">জনবল</a></li> <li><a href="gallery.html">গ্যালারি</a></li> 
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="links.html">লিংক</a></li> 
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="page-title">কর্মকর্তা ও কর্মচারীদের তালিকা (মোট ২০ জন)</h2>
+        
+        <div class="officials-grid">
+            
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব মোঃ মজিবুর রহমান</h4>
+                <p class="designation">মহাপরিচালক (অতিরিক্ত সচিব)</p>
+                <p>ডিপার্টমেন্ট: প্রশাসন ও পরিকল্পনা</p>
+                <p class="mobile">মোবাইল: ০১৭০০-১১২৩৪৫</p>
+            </div>
+            
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>মোহাম্মদ মশিউর রহমান</h4>
+                <p class="designation">পরিচালক (প্রশাসন ও অর্থ)</p>
+                <p>ডিপার্টমেন্ট: প্রশাসন</p>
+                <p class="mobile">মোবাইল: ০১৮০০-৫৬৭৮৯০</p>
+            </div>
+            
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>ড. মোঃ হাবিবুর রহমান</h4>
+                <p class="designation">পরিচালক (পরিসংখ্যান)</p>
+                <p>ডিপার্টমেন্ট: পরিসংখ্যান</p>
+                <p class="mobile">মোবাইল: ০১৭১২-১২২৩৪৫</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব রতন কুমার সাহা</h4>
+                <p class="designation">উপ-পরিচালক (পরিকল্পনা)</p>
+                <p>ডিপার্টমেন্ট: পরিকল্পনা ও গবেষণা</p>
+                <p class="mobile">মোবাইল: ০১৭১৫-৭৭৮৮৯৯</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>মিসেস ফারজানা হক</h4>
+                <p class="designation">উপ-পরিচালক (আইসিটি ও এমআইএস)</p>
+                <p>ডিপার্টমেন্ট: আইসিটি ও এমআইএস</p>
+                <p class="mobile">মোবাইল: ০১৯১৭-২০০১১১</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>ইঞ্জিঃ আসিফ ইকবাল</h4>
+                <p class="designation">সিনিয়র সিস্টেম অ্যানালিস্ট</p>
+                <p>ডিপার্টমেন্ট: আইসিটি উইং</p>
+                <p class="mobile">মোবাইল: ০১৭১৯-৩৩০৪৪০</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব খায়রুল ইসলাম</h4>
+                <p class="designation">প্রোগ্রামার</p>
+                <p>ডিপার্টমেন্ট: আইসিটি ও ডাটা</p>
+                <p class="mobile">মোবাইল: ০১৬৭০-২২২২৩৩</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>ড. মাকসুদা বেগম</h4>
+                <p class="designation">গবেষণা কর্মকর্তা</p>
+                <p>ডিপার্টমেন্ট: গবেষণা ও প্রকাশনা</p>
+                <p class="mobile">মোবাইল: ০১৭১৪-৮৯০০০১</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব আমিনুল ইসলাম</h4>
+                <p class="designation">পরিসংখ্যান কর্মকর্তা</p>
+                <p>ডিপার্টমেন্ট: শিক্ষা জরিপ</p>
+                <p class="mobile">মোবাইল: ০১৭১৮-৫৫৮৮৯৯</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব রফিকুল হাসান</h4>
+                <p class="designation">প্রশাসনিক কর্মকর্তা</p>
+                <p>ডিপার্টমেন্ট: প্রশাসন</p>
+                <p class="mobile">মোবাইল: ০১৭৬৫-৪৪৫৫৬৬</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>মিসেস নুসরাত জাহান</h4>
+                <p class="designation">হিসাব রক্ষণ কর্মকর্তা</p>
+                <p>ডিপার্টমেন্ট: অর্থ</p>
+                <p class="mobile">মোবাইল: ০১৮৮৮-৭৭৬৬৫০</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব তৌহিদুল আলম</h4>
+                <p class="designation">প্রশিক্ষণ সমন্বয়কারী</p>
+                <p>ডিপার্টমেন্ট: ইউআইটিআরসিই</p>
+                <p class="mobile">মোবাইল: ০১৭২৩-৯৯১১২২</p>
+            </div>
+            
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব রবিউল ইসলাম</h4>
+                <p class="designation">লাইব্রেরি সহকারী</p>
+                <p>ডিপার্টমেন্ট: গ্রন্থাগার</p>
+                <p class="mobile">মোবাইল: ০১৯৯৯-৮৮৭৭৬৬</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>মিসেস শামীমা আক্তার</h4>
+                <p class="designation">ডাটা এন্ট্রি অপারেটর</p>
+                <p>ডিপার্টমেন্ট: ডাটা প্রসেসিং</p>
+                <p class="mobile">মোবাইল: ০১৬৫০-৩৩৪৪০৫</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব জহির উদ্দিন</h4>
+                <p class="designation">সহকারী হিসাবরক্ষক</p>
+                <p>ডিপার্টমেন্ট: অর্থ</p>
+                <p class="mobile">মোবাইল: ০১৭৪০-৫৫৮০৭৯</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব মোশাররফ হোসেন</h4>
+                <p class="designation">অফিস সহকারী কাম কম্পিউটার অপারেটর</p>
+                <p>ডিপার্টমেন্ট: সাধারণ শাখা</p>
+                <p class="mobile">মোবাইল: ০১৭১১-৯৯০০০০</p>
+            </div>
+            
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</p>
+                <h4>জনাব রফিকুল ইসলাম</h4>
+                <p class="designation">ড্রাইভার</p>
+                <p>ডিপার্টমেন্ট: পরিবহন</p>
+                <p class="mobile">মোবাইল: ০১৮৭৬-৫৪২১৩০</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব কবির উদ্দিন</h4>
+                <p class="designation">নিরাপত্তা প্রহরী</p>
+                <p>ডিপার্টমেন্ট: নিরাপত্তা</p>
+                <p class="mobile">মোবাইল: ০১৬৮০-১১১১১১</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>মিসেস ফরিদা খাতুন</h4>
+                <p class="designation">পরিচ্ছন্নতা কর্মী</p>
+                <p>ডিপার্টমেন্ট: সাধারণ শাখা</p>
+                <p class="mobile">মোবাইল: ০১৮০৯-০৯৮৭৬৬</p>
+            </div>
+
+            <div class="official-card">
+                <div class="photo-placeholder">ছবি</div>
+                <h4>জনাব করিম মিয়া</h4>
+                <p class="designation">এমএলএসএস</p>
+                <p>ডিপার্টমেন্ট: সাধারণ শাখা</p>
+                <p class="mobile">মোবাইল: ০১৭২৪-৩০৩০৩০</p>
+            </div>
+
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="#" style="color: #609513; font-weight: bold;">সম্পূর্ণ জনবল তালিকা (পিডিএফ) দেখুন</a>
+        </div>
+    </div>
+
+    <footer>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">ব্যানবেইস</h3>
+                <p>শিক্ষা মন্ত্রণালয়ের অধীনস্থ একটি সরকারি প্রতিষ্ঠান।</p>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">অন্যান্য</h3>
+                <ul>
+                    <li><a href="#">নীতিমালা</a></li>
+                    <li><a href="#">ফোকাল পয়েন্ট</a></li>
+                    <li><a href="#">বার্ষিক প্রতিবেদন</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৫ বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস), সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+</body>
+</html>
