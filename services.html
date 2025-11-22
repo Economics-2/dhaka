@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অধিদপ্তরের সেবাসমূহ - ব্যানবেইস</title>
+    <style>
+        /* --- পূর্বের সাধারণ স্টাইলগুলো --- */
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        
+        .top-bar {
+            background-color: #efefef;
+            padding: 5px 10%;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+        }
+        .header {
+            background-image: linear-gradient(to bottom, #609513, #4e7a0e);
+            padding: 20px 10%;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #609513;
+            border: 3px solid #fff;
+        }
+        .site-title h1 { margin: 0; font-size: 24px; }
+        .site-title p { margin: 5px 0 0; font-size: 14px; }
+
+        .nav-bar {
+            background-color: #2c3e50;
+            padding: 0 10%;
+        }
+        .nav-bar ul { display: flex; flex-wrap: wrap; }
+        .nav-bar li { position: relative; }
+        .nav-bar a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .nav-bar a:hover { background-color: #609513; }
+        
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .page-title {
+            border-bottom: 3px solid #609513;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        /* --- সার্ভিস কার্ড স্টাইল --- */
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .service-card {
+            display: flex;
+            align-items: flex-start;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-left 0.3s;
+        }
+        .service-card:hover {
+            border-left: 5px solid #609513;
+        }
+        .service-icon {
+            font-size: 35px;
+            color: #d32f2f; /* Red accent for visibility */
+            margin-right: 20px;
+            padding-top: 5px;
+        }
+        .service-details {
+            flex: 1;
+        }
+        .service-details h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+        .service-details p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .service-link {
+            color: #609513;
+            font-weight: bold;
+        }
+        .service-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ফুটার স্টাইল */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 40px 10%;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { width: 95%; padding: 15px; }
+            .header, .top-bar { text-align: center; flex-direction: column; }
+            .nav-bar ul { flex-direction: column; }
+            .service-card { flex-direction: column; align-items: center; text-align: center; }
+            .service-icon { margin: 0 0 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>বাংলাদেশ জাতীয় তথ্য বাতায়ন</div>
+        <div>
+            <a href="#">English</a>
+            <a href="#">লগইন</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">লোগো</div>
+        <div class="site-title">
+            <h1>বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস)</h1>
+            <p>মাধ্যমিক ও উচ্চ শিক্ষা বিভাগ, শিক্ষা মন্ত্রণালয়</p>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="index.html">প্রথম পাতা</a></li>
+            <li><a href="about.html">আমাদের সম্পর্কিত</a></li>
+            <li><a href="services.html" style="background-color: #609513;">অধিদপ্তরের সেবাসমূহ</a></li> <li><a href="notice.html">নোটিশ বোর্ড</a></li>
+            <li><a href="news.html">খবর ও হালনাগাদ</a></li> 
+            <li><a href="gallery.html">গ্যালারি</a></li> 
+            <li><a href="contact.html">যোগাযোগ</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="page-title">ব্যানবেইস কর্তৃক প্রদত্ত প্রধান সেবাসমূহ</h2>
+        
+        <div class="services-list">
+            
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <div class="service-details">
+                    <h3>বার্ষিক শিক্ষা প্রতিষ্ঠান জরিপ</h3>
+                    <p>সকল স্তরের শিক্ষা প্রতিষ্ঠান থেকে বছরে একবার ডেটা সংগ্রহ, প্রক্রিয়াকরণ এবং প্রকাশনা করা হয়। এই জরিপের তথ্য সরকারি নীতি নির্ধারণ ও পরিকল্পনার জন্য অপরিহার্য।</p>
+                    <a href="#" class="service-link">জরিপ ফরম এন্ট্রি লিংক</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✅</div>
+                <div class="service-details">
+                    <h3>MPO শিক্ষক ভেরিফিকেশন ও EIIN সেবা</h3>
+                    <p>বেসরকারি শিক্ষা প্রতিষ্ঠানের শিক্ষক-কর্মচারীগণের MPO সংক্রান্ত যাচাইকরণ এবং প্রতিষ্ঠানসমূহের EIIN নম্বর সংক্রান্ত অনলাইন ডাটা প্রদান ও সংশোধনের সেবা প্রদান করা হয়।</p>
+                    <a href="#" class="service-link">MPO ভেরিফাই করুন</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <div class="service-details">
+                    <h3>সিটিজেন চার্টার (নাগরিক সেবা প্রতিশ্রুতি)</h3>
+                    <p>অধিদপ্তরের সকল প্রকার সেবার বিবরণ, সেবার মান ও সময়সীমা এই চার্টারে উল্লেখ করা হয়েছে। সেবা গ্রহীতার অধিকার নিশ্চিত করাই এর লক্ষ্য।</p>
+                    <a href="#" class="service-link">সিটিজেন চার্টার দেখুন</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <div class="service-details">
+                    <h3>UITRCE প্রশিক্ষণ ও রিসোর্স সেন্টার</h3>
+                    <p>শিক্ষক ও কর্মকর্তাদের আইসিটি দক্ষতা বৃদ্ধির জন্য নিয়মিত বেসিক ও অ্যাডভান্স প্রশিক্ষণ কোর্স পরিচালনা করা হয়। এটি একটি অত্যাধুনিক প্রশিক্ষণ কেন্দ্র।</p>
+                    <a href="#" class="service-link">অনলাইন রেজিস্ট্রেশন</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📘</div>
+                <div class="service-details">
+                    <h3>শিক্ষা পরিসংখ্যান রিপোর্ট প্রকাশ</h3>
+                    <p>প্রতি বছর বাংলাদেশের শিক্ষা সংক্রান্ত বিস্তারিত ও নির্ভরযোগ্য পরিসংখ্যান রিপোর্ট প্রকাশ করা হয়, যা গবেষক ও নীতিনির্ধারকদের জন্য অত্যন্ত মূল্যবান।</p>
+                    <a href="#" class="service-link">সকল রিপোর্ট ডাউনলোড</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🚨</div>
+                <div class="service-details">
+                    <h3>অভিযোগ প্রতিকার ব্যবস্থাপনা (জিআরএস)</h3>
+                    <p>সেবা প্রাপ্তি সংক্রান্ত যেকোনো অভিযোগ দ্রুত ও স্বচ্ছ প্রক্রিয়ায় নিষ্পত্তির জন্য অনলাইন অভিযোগ প্রতিকার ব্যবস্থাপনা (GRS) কার্যকর রয়েছে।</p>
+                    <a href="#" class="service-link">অনলাইনে অভিযোগ করুন</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <footer>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
+                <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">ব্যানবেইস</h3>
+                <p>শিক্ষা মন্ত্রণালয়ের অধীনস্থ একটি সরকারি প্রতিষ্ঠান।</p>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">দ্রুত লিংক</h3>
+                <ul>
+                    <li><a href="#">IEIMS</a></li>
+                    <li><a href="#">G-R-S ফোকাল পয়েন্ট</a></li>
+                    <li><a href="#">লাইব্রেরি</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৫ বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস), সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+</body>
+</html>
