@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস)</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        
+        /* Top Bar */
+        .top-bar {
+            background-color: #efefef;
+            padding: 5px 10%;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+        }
+        .top-bar a { color: #609513; margin-left: 10px; }
+
+        /* Header / Banner */
+        .header {
+            background-image: linear-gradient(to bottom, #609513, #4e7a0e);
+            padding: 20px 10%;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #609513;
+            border: 3px solid #fff;
+        }
+        .site-title h1 { margin: 0; font-size: 24px; }
+        .site-title p { margin: 5px 0 0; font-size: 14px; }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: #2c3e50;
+            padding: 0 10%;
+        }
+        .nav-bar ul { display: flex; flex-wrap: wrap; }
+        .nav-bar li { position: relative; }
+        .nav-bar a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .nav-bar a:hover { background-color: #609513; }
+
+        /* Marquee / Notice */
+        .notice-bar {
+            background-color: #e8f5e9;
+            padding: 10px 10%;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #c8e6c9;
+        }
+        .notice-title {
+            background-color: #d32f2f;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            margin-right: 10px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+        marquee { font-size: 14px; color: #d32f2f; }
+
+        /* Main Content Layout */
+        .container {
+            display: flex;
+            width: 80%;
+            margin: 20px auto;
+            gap: 20px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            flex: 1;
+            min-width: 250px;
+        }
+        .sidebar-card {
+            background: white;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #609513;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .card-body { padding: 15px; }
+        .profile-card { text-align: center; }
+        .profile-img {
+            width: 100px;
+            height: 120px;
+            background-color: #ddd;
+            margin: 0 auto 10px;
+            display: block;
+        }
+        .sidebar-links li {
+            border-bottom: 1px solid #eee;
+            padding: 8px 0;
+        }
+        .sidebar-links a:hover { color: #609513; text-decoration: underline; }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 3;
+        }
+        .hero-banner {
+            width: 100%;
+            height: 300px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 20px;
+            background-image: url('https://via.placeholder.com/800x300?text=BANBEIS+Banner');
+            background-size: cover;
+        }
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .service-box {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .service-box:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .icon {
+            font-size: 40px;
+            color: #609513;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 40px 10%;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .footer-section { flex: 1; margin-right: 20px; min-width: 200px; }
+        .footer-section h3 { color: white; border-bottom: 2px solid #609513; padding-bottom: 10px; display: inline-block; }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { flex-direction: column; width: 95%; }
+            .nav-bar ul { flex-direction: column; }
+            .top-bar { flex-direction: column; text-align: center; }
+            .header { flex-direction: column; text-align: center; }
+            .logo { margin: 0 0 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>বাংলাদেশ জাতীয় তথ্য বাতায়ন</div>
+        <div>
+            <a href="#">English</a>
+            <a href="#">যোগাযোগ</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">লোগো</div>
+        <div class="site-title">
+            <h1>বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস)</h1>
+            <p>মাধ্যমিক ও উচ্চ শিক্ষা বিভাগ, শিক্ষা মন্ত্রণালয়</p>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="#">প্রথম পাতা</a></li>
+            <li><a href="#">আমাদের সম্পর্কিত</a></li>
+            <li><a href="#">অধিদপ্তরের সেবাসমূহ</a></li>
+            <li><a href="#">শিক্ষা জরিপ ২০২৫</a></li>
+            <li><a href="#">পরিসংখ্যান রিপোর্ট</a></li>
+            <li><a href="#">গ্যালারি</a></li>
+            <li><a href="#">যোগাযোগ</a></li>
+        </ul>
+    </nav>
+
+    <div class="notice-bar">
+        <div class="notice-title">নোটিশ:</div>
+        <marquee scrollamount="5">
+            ব্যানবেইস-এর লাইব্রেরি সহকারী জনাব মোঃ রবিউল ইসলাম এর ইন্তেকাল (শোক বার্তা) | বার্ষিক শিক্ষা প্রতিষ্ঠান জরিপ ২০২৫ এর সময়সীমা বৃদ্ধি করা হয়েছে | অনলাইন EIIN ভেরিফিকেশন সংক্রান্ত জরুরি বিজ্ঞপ্তি...
+        </marquee>
+    </div>
+
+    <div class="container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="card-header">মহাপরিচালক</div>
+                <div class="card-body profile-card">
+                    <img src="https://via.placeholder.com/100x120" alt="DG Photo" class="profile-img">
+                    <h4>জনাব মোঃ মজিবুর রহমান</h4>
+                    <p>অতিরিক্ত সচিব</p>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="card-header">অভ্যন্তরীণ ই-সেবাসমূহ</div>
+                <ul class="card-body sidebar-links">
+                    <li><a href="#">MPO Teacher Verify</a></li>
+                    <li><a href="#">GIS & CVS</a></li>
+                    <li><a href="#">Institute Search</a></li>
+                    <li><a href="#">Online EIIN</a></li>
+                    <li><a href="#">Webmail</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="hero-banner">
+                ব্যানবেইস কার্যক্রমের সচিত্র প্রতিবেদন
+            </div>
+
+            <div class="section-grid">
+                <div class="service-box">
+                    <div class="icon">📊</div>
+                    <h3>শিক্ষা জরিপ</h3>
+                    <p>বার্ষিক শিক্ষা প্রতিষ্ঠান জরিপ এবং পরিসংখ্যান।</p>
+                </div>
+                <div class="service-box">
+                    <div class="icon">📝</div>
+                    <h3>সিটিজেন চার্টার</h3>
+                    <p>নাগরিক সেবা প্রদান প্রতিশ্রুতি ও তালিকা।</p>
+                </div>
+                <div class="service-box">
+                    <div class="icon">💻</div>
+                    <h3>UITRCE</h3>
+                    <p>আইসিটি ট্রেনিং ও রিসোর্স সেন্টার কার্যক্রম।</p>
+                </div>
+                <div class="service-box">
+                    <div class="icon">🔍</div>
+                    <h3>গবেষণা</h3>
+                    <p>শিক্ষা বিষয়ক বিভিন্ন গবেষণা ও প্রকাশনা।</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h2 style="border-bottom: 2px solid #609513; padding-bottom: 10px;">সাম্প্রতিক খবর</h2>
+                <ul style="list-style: circle; padding-left: 20px;">
+                    <li><a href="#">শিক্ষা পরিসংখ্যান ২০২৩ এর খসড়া প্রতিবেদন প্রকাশ।</a></li>
+                    <li><a href="#">SDG 4 বাস্তবায়ন অগ্রগতি বিষয়ক কর্মশালা।</a></li>
+                    <li><a href="#">ব্যানবেইস অডিটরিয়ামে সেমিনার আয়োজন।</a></li>
+                </ul>
+            </div>
+        </main>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>যোগাযোগ</h3>
+                <p>১ জহির রায়হান রোড (পলাশী-নীলক্ষেত), ঢাকা-১২০৫</p>
+                <p>ইমেইল: info@banbeis.gov.bd</p>
+                <p>ফোন: +৮৮-০২-৯৬৬৫৪৫৭</p>
+            </div>
+            <div class="footer-section">
+                <h3>গুরুত্বপূর্ণ লিংক</h3>
+                <ul>
+                    <li><a href="#">শিক্ষা মন্ত্রণালয়</a></li>
+                    <li><a href="#">মাউশি</a></li>
+                    <li><a href="#">জাতীয় তথ্য বাতায়ন</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৫ বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস), সর্বস্বত্ব সংরক্ষিত।</p>
+            <p>কারিগরি সহায়তায়: এআই অ্যাসিস্ট্যান্ট</p>
+        </div>
+    </footer>
+
+</body>
+</html>
