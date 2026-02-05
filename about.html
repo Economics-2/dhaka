@@ -31,21 +31,23 @@
             align-items: center;
             color: white;
         }
-        .logo {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            border-radius: 50%;
-            margin-right: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #609513;
-            border: 3px solid #fff;
-        }
+        /* লোগো ইমেজকে বক্সে ফিট করার জন্য নতুন স্টাইল */
+.logo img {
+    width: 20%;       /* ছবির প্রস্থকে .logo বক্সের সমান করবে */
+    height: 30%;      /* ছবির উচ্চতাকে .logo বক্সের সমান করবে */
+    object-fit: cover; /* ছবিটি যেন বক্সের মধ্যে সম্পূর্ণভাবে দেখায় */
+    border-radius: 50%; /* ছবিটি যদি গোল করে দেখাতে চান */
+}
+/* 기존 .logo এর ডিজাইন: 
+.logo {
+    width: 80px; 
+    height: 80px;
+    ...
+} 
+*/
         .site-title h1 { margin: 0; font-size: 24px; }
         .site-title p { margin: 5px 0 0; font-size: 14px; }
+
 
         .nav-bar {
             background-color: #2c3e50;
