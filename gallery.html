@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>গ্যালারি - ব্যানবেইস</title>
+    <title>গ্যালারি</title>
     <style>
         /* --- পূর্বের সাধারণ স্টাইলগুলো --- */
         body {
@@ -31,21 +31,23 @@
             align-items: center;
             color: white;
         }
-        .logo {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            border-radius: 50%;
-            margin-right: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #609513;
-            border: 3px solid #fff;
-        }
+        /* লোগো ইমেজকে বক্সে ফিট করার জন্য নতুন স্টাইল */
+.logo img {
+    width: 20%;       /* ছবির প্রস্থকে .logo বক্সের সমান করবে */
+    height: 30%;      /* ছবির উচ্চতাকে .logo বক্সের সমান করবে */
+    object-fit: cover; /* ছবিটি যেন বক্সের মধ্যে সম্পূর্ণভাবে দেখায় */
+    border-radius: 50%; /* ছবিটি যদি গোল করে দেখাতে চান */
+}
+/* 기존 .logo এর ডিজাইন: 
+.logo {
+    width: 80px; 
+    height: 80px;
+    ...
+} 
+*/
         .site-title h1 { margin: 0; font-size: 24px; }
         .site-title p { margin: 5px 0 0; font-size: 14px; }
+
 
         .nav-bar {
             background-color: #2c3e50;
@@ -134,64 +136,72 @@
 <body>
 
     <div class="top-bar">
-        <div>বাংলাদেশ জাতীয় তথ্য বাতায়ন</div>
+        <div>জিয়াউদ্দিন স্কুল এন্ড কলেজ শিক্ষক ফোরাম</div>
         <div>
-            <a href="#">English</a>
-            <a href="#">লগইন</a>
+            <a href="english.html">English</a>
+            <a href="contact.html">যোগাযোগ</a>
         </div>
     </div>
 
     <header class="header">
-        <div class="logo">লোগো</div>
-        <div class="site-title">
-            <h1>বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস)</h1>
-            <p>মাধ্যমিক ও উচ্চ শিক্ষা বিভাগ, শিক্ষা মন্ত্রণালয়</p>
+    <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+        
+        <div class="logo">
+            <img src="1.jpg" alt="ব্যানবেইস লোগো"> 
         </div>
-    </header>
+        
+        <div class="site-title">
+            <h1>জিয়াউদ্দিন স্কুল এন্ড কলেজ শিক্ষক ফোরাম</h1>
+            <p>মাধ্যমিক ও উচ্চ শিক্ষা বিভাগ</p>
+        </div>
+    </a>
+</header>
 
     <nav class="nav-bar">
         <ul>
-            <li><a href="index.html">প্রথম পাতা</a></li>
+            <li><a href="#">প্রথম পাতা</a></li>
             <li><a href="about.html">আমাদের সম্পর্কিত</a></li>
-            <li><a href="#">অধিদপ্তরের সেবাসমূহ</a></li>
-            <li><a href="#">শিক্ষা জরিপ ২০২৫</a></li>
-            <li><a href="#">পরিসংখ্যান রিপোর্ট</a></li>
-            <li><a href="gallery.html" style="background-color: #609513;">গ্যালারি</a></li> <li><a href="contact.html">যোগাযোগ</a></li>
+            <li><a href="news.html">সেবাসমূহ</a></li>
+            <li><a href="services.html">শিক্ষা জরিপ ২০২৫</a></li>
+            <li><a href="notice.html">শিক্ষা জরিপ ২০২৫</a></li>
+            <li><a href="officials.html">পরিসংখ্যান রিপোর্ট</a></li>
+            <li><a href="gallery.html">গ্যালারি</a></li>
+            <li><a href="contact.html">যোগাযোগ</a></li>
+            
         </ul>
     </nav>
-
     <div class="container">
         <h2 class="page-title">সচিত্র গ্যালারি</h2>
 
         <div class="gallery-grid">
             
             <div class="gallery-item">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7112159361165626316_0" alt="পরিসংখ্যান প্রতিবেদন প্রকাশ">
+                <img src="5.jpg">
                 <div class="caption">বার্ষিক শিক্ষা পরিসংখ্যান প্রতিবেদন প্রকাশ অনুষ্ঠান</div>
             </div>
 
             <div class="gallery-item">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7112159361165626316_1" alt="আইসিটি প্রশিক্ষণ">
+                <img src="image.jpg" alt="আইসিটি প্রশিক্ষণ">
                 <div class="caption">UITRCE কর্তৃক শিক্ষকদের বেসিক আইসিটি প্রশিক্ষণ</div>
             </div>
 
             <div class="gallery-item">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7112159361165626316_2" alt="জরিপ পর্যালোচনা সভা">
+                <img src="image.jpg" alt="জরিপ পর্যালোচনা সভা">
                 <div class="caption">শিক্ষা জরিপ ২০২৫ এর অগ্রগতি পর্যালোচনা সভা</div>
             </div>
             
             <div class="gallery-item">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7112159361165626316_3" alt="সেমিনার">
+                <img src="image.jpg" alt="সেমিনার">
                 <div class="caption">শিক্ষা খাতে SDG ৪ অর্জনের ওপর সেমিনার</div>
             </div>
             
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/300x200?text=Digital+Data" alt="ডিজিটাল ডাটা সেন্টার">
+                <img src="image.jpg" alt="ডিজিটাল ডাটা সেন্টার">
                 <div class="caption">ব্যানবেইস ডাটা সেন্টার পরিদর্শন</div>
             </div>
             
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/300x200?text=Officers+Meeting" alt="অফিসারদের সভা">
+                <img src="image.jpg" alt="অফিসারদের সভা">
                 <div class="caption">মহাপরিচালকের সাথে কর্মকর্তাদের মাসিক সভা</div>
             </div>
             
@@ -206,7 +216,7 @@
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
             <div style="flex: 1; min-width: 200px; margin-bottom: 20px;">
                 <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">ব্যানবেইস</h3>
-                <p>শিক্ষা মন্ত্রণালয়ের অধীনস্থ একটি সরকারি প্রতিষ্ঠান।</p>
+                <p>জিয়াউদ্দিন স্কুল এন্ড কলেজ শিক্ষক ফোরাম</p>
             </div>
             <div style="flex: 1; min-width: 200px;">
                 <h3 style="color: white; border-bottom: 2px solid #609513; display: inline-block; padding-bottom: 5px;">দ্রুত লিংক</h3>
@@ -218,7 +228,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© ২০২৫ বাংলাদেশ শিক্ষাতথ্য ও পরিসংখ্যান ব্যুরো (ব্যানবেইস), সর্বস্বত্ব সংরক্ষিত।</p>
+            <p>© ২০২৫ মোঃ মঞ্জুরুল হক, সর্বস্বত্ব সংরক্ষিত।</p>
         </div>
     </footer>
 
